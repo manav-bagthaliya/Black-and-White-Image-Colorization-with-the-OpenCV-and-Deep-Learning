@@ -13,7 +13,7 @@ def load_cifar10_batch(file):
         return X, Y
 
 # Path to the CIFAR-10 dataset batches
-dataset_path = './dataset/cifar-10-batches-py'
+dataset_path = './Dataset/cifar-10-batches-py'
 
 # Load all training batches
 train_images = []
@@ -29,7 +29,8 @@ train_images = np.concatenate(train_images, axis=0)
 grayscale_images = np.array([cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) for img in train_images])
 
 # Save grayscale images to a folder
+os.makedirs('./Images', exist_ok=True)
 for idx, img in enumerate(grayscale_images[:10]):  # Save only 10 images for simplicity
-    img_path = f'./images/img_{idx}.jpg'
+    img_path = f'./Images/img_{idx}.jpg'
     cv2.imwrite(img_path, img)
     print(f"Saved {img_path}")

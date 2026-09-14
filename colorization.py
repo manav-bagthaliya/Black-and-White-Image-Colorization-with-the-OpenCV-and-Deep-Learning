@@ -88,7 +88,7 @@ def colorize_selected_region(img):
 
     return colorized, (x, y, w, h)
 
-image_directory = './images/*'
+image_directory = './Images/*'
 image_paths = glob.glob(image_directory)
 
 cv2.namedWindow("Image Colorization", cv2.WINDOW_NORMAL)
