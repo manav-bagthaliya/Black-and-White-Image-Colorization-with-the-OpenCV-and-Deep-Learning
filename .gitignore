@@ -1,3 +1,5 @@
+venv/
 colorization_env/
 __pycache__/
 *.pyc
+Output/

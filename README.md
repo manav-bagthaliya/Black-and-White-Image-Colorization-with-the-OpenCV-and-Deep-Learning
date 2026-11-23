@@ -46,3 +46,41 @@ colorization_deploy_v2.prototxt (model architecture)
 colorization_release_v2.caffemodel (trained weights)
 
 These were trained on over 1.3 million images from the ImageNet dataset to learn color distribution patterns.
+
+The model is from Zhang, Isola & Efros, "Colorful Image Colorization" (ECCV 2016) — https://github.com/richzhang/colorization
+
+# Setup
+
+`Model/colorization_release_v2.caffemodel` is stored with Git LFS. After cloning, run `git lfs install && git lfs pull`, or the model will fail to load.
+
+```bash
+python3.12 -m venv venv
+source venv/bin/activate          # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+`opencv-python` is pinned below 5 because OpenCV 5 removed Caffe model support.
+
+# Usage
+
+Put images in `Images/`, then:
+
+```bash
+python colorization.py
+```
+
+For each image:
+1. The full colorized image is saved to `Output/<name>_colorized.jpg`.
+2. A window asks you to select a region: drag a box, press Enter/Space (or `c` to skip).
+3. The result shows the full colorization (left) and only the selected region colorized on the grayscale image (right), saved as `Output/<name>_region.jpg`.
+4. Press any key for the next image; `Esc` or `q` quits.
+
+Headless (no display), one image:
+
+```bash
+python -c "
+import cv2
+from colorization import colorize_full_image
+cv2.imwrite('output.jpg', colorize_full_image(cv2.imread('Images/img_0.jpg')))
+"
+```
